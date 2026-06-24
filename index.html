@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="description" content="Visit Arulmigu Subramaniya Swami Temple, Marudhamalai, Coimbatore. Real-time darshan status, pooja timings, annadhanam, directions and parking info.">
+<title>Marudhamalai Murugan Temple – Coimbatore</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Tiro+Tamil:ital@0;1&family=Inter:wght@400;500;600;700&display=swap');
+
+  :root {
+    --saffron:    #E8610A;
+    --deep-red:   #9B1C1C;
+    --gold:       #D4A017;
+    --gold-light: #F5D47A;
+    --cream:      #FDF6EC;
+    --stone:      #3D2B1F;
+    --stone-soft: #6B4C3B;
+    --white:      #FFFFFF;
+    --open-green: #1A7A4A;
+    --closed-red: #9B1C1C;
+    --busy-amber: #B45309;
+    --card-bg:    #FFFAF3;
+    --divider:    #E8D5B7;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--stone);
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 480px;
+    margin: 0 auto;
+    padding-bottom: 80px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(160deg, #7B1A1A 0%, #B8420A 55%, #D4A017 100%);
+    padding: 28px 20px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: rgba(212,160,23,0.15);
+  }
+  .hero-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 6px;
+  }
+  .hero-tamil {
+    font-family: 'Tiro Tamil', serif;
+    font-size: 22px;
+    color: var(--white);
+    line-height: 1.4;
+    margin-bottom: 4px;
+  }
+  .hero-english {
+    font-size: 13px;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .hero-pill {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 12px;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .hero-pill .dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--gold-light);
+    flex-shrink: 0;
+  }
+
+  /* ── DARSHAN STATUS CARD ── */
+  .status-card {
+    margin: -18px 16px 0;
+    background: var(--white);
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(61,43,31,0.12);
+    overflow: hidden;
+    position: relative;
+    z-index: 10;
+  }
+  .status-header {
+    background: var(--stone);
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .status-header span {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--gold-light);
+  }
+  .status-badge {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 12px;
+    letter-spacing: 0.5px;
+  }
+  .badge-open   { background: #D1FAE5; color: var(--open-green); }
+  .badge-closed { background: #FEE2E2; color: var(--closed-red); }
+  .badge-busy   { background: #FEF3C7; color: var(--busy-amber); }
+
+  .status-body {
+    padding: 14px 16px 16px;
+  }
+  .status-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  .status-row:last-child { margin-bottom: 0; }
+  .status-label {
+    font-size: 12px;
+    color: var(--stone-soft);
+    font-weight: 500;
+  }
+  .status-value {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--stone);
+    text-align: right;
+    max-width: 58%;
+  }
+  .status-updated {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid var(--divider);
+    font-size: 11px;
+    color: #999;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  /* ── SECTION ── */
+  .section {
+    margin: 20px 16px 0;
+  }
+  .section-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    text-transform: uppercase;
+    color: var(--saffron);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--divider);
+  }
+
+  /* ── TIMING TABLE ── */
+  .timing-card {
+    background: var(--card-bg);
+    border: 1px solid var(--divider);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .timing-row {
+    display: flex;
+    align-items: stretch;
+    border-bottom: 1px solid var(--divider);
+  }
+  .timing-row:last-child { border-bottom: none; }
+  .timing-left {
+    background: var(--saffron);
+    width: 4px;
+    flex-shrink: 0;
+  }
+  .timing-left.gold { background: var(--gold); }
+  .timing-left.red  { background: var(--deep-red); }
+  .timing-content {
+    flex: 1;
+    padding: 11px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .timing-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--stone);
+  }
+  .timing-sub {
+    font-size: 11px;
+    color: var(--stone-soft);
+    margin-top: 2px;
+  }
+  .timing-time {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--stone-soft);
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  /* ── ANNADHANAM ── */
+  .anna-card {
+    background: linear-gradient(135deg, #7B1A1A 0%, #9B2C1C 100%);
+    border-radius: 14px;
+    padding: 16px;
+    color: var(--white);
+  }
+  .anna-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .anna-icon {
+    width: 42px; height: 42px;
+    background: rgba(255,255,255,0.12);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .anna-title {
+    font-family: 'Tiro Tamil', serif;
+    font-size: 17px;
+    color: var(--gold-light);
+  }
+  .anna-eng {
+    font-size: 12px;
+    color: rgba(255,255,255,0.65);
+  }
+  .anna-times {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .anna-slot {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 10px;
+    padding: 10px 12px;
+  }
+  .anna-slot-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 3px;
+  }
+  .anna-slot-time {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--white);
+  }
+  .anna-note {
+    margin-top: 12px;
+    font-size: 11px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.5;
+  }
+
+  /* ── DIRECTIONS & PARKING ── */
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .info-tile {
+    background: var(--card-bg);
+    border: 1px solid var(--divider);
+    border-radius: 12px;
+    padding: 14px 12px;
+    text-align: center;
+  }
+  .info-tile .icon { font-size: 24px; margin-bottom: 6px; }
+  .info-tile .label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--saffron);
+    margin-bottom: 5px;
+    text-transform: uppercase;
+  }
+  .info-tile .detail {
+    font-size: 12px;
+    color: var(--stone-soft);
+    line-height: 1.5;
+  }
+  .info-tile a {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--saffron);
+    text-decoration: none;
+    border: 1px solid var(--saffron);
+    border-radius: 20px;
+    padding: 4px 12px;
+  }
+
+  /* ── ACCOMMODATION ── */
+  .hotel-list { display: flex; flex-direction: column; gap: 10px; }
+  .hotel-card {
+    background: var(--card-bg);
+    border: 1px solid var(--divider);
+    border-radius: 12px;
+    padding: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hotel-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    background: var(--saffron);
+    color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .hotel-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--stone);
+  }
+  .hotel-detail {
+    font-size: 11px;
+    color: var(--stone-soft);
+    margin-top: 2px;
+  }
+  .hotel-dist {
+    margin-left: auto;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--saffron);
+    white-space: nowrap;
+  }
+
+  /* ── POOJA BOOKING ── */
+  .booking-card {
+    background: linear-gradient(135deg, #D4A017 0%, #E8610A 100%);
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+  }
+  .booking-card h3 {
+    font-family: 'Tiro Tamil', serif;
+    font-size: 20px;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+  .booking-card p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+  .pooja-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .pooja-item {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 10px;
+    padding: 10px 8px;
+    color: var(--white);
+  }
+  .pooja-item-name {
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .pooja-item-price {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--gold-light);
+    margin-top: 2px;
+  }
+  .btn-whatsapp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #25D366;
+    color: white;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 12px;
+    padding: 14px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+    transition: opacity 0.15s;
+  }
+  .btn-whatsapp:active { opacity: 0.85; }
+  .btn-whatsapp svg { width: 20px; height: 20px; fill: white; }
+
+  /* ── STICKY BOTTOM BAR ── */
+  .sticky-bar {
+    position: fixed;
+    bottom: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
+    background: var(--white);
+    border-top: 1px solid var(--divider);
+    padding: 10px 16px;
+    display: flex;
+    gap: 10px;
+    z-index: 100;
+    box-shadow: 0 -4px 20px rgba(61,43,31,0.08);
+  }
+  .sticky-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border-radius: 10px;
+    padding: 11px;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+  }
+  .sticky-btn-primary {
+    background: var(--saffron);
+    color: white;
+  }
+  .sticky-btn-secondary {
+    background: #25D366;
+    color: white;
+  }
+
+  /* ── ADMIN PANEL (hidden, URL-hash triggered) ── */
+  .admin-panel {
+    display: none;
+    margin: 20px 16px 0;
+    background: var(--stone);
+    border-radius: 14px;
+    padding: 18px;
+    color: white;
+  }
+  .admin-panel.active { display: block; }
+  .admin-title {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--gold-light);
+    margin-bottom: 14px;
+    text-transform: uppercase;
+  }
+  .admin-group { margin-bottom: 12px; }
+  .admin-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 5px;
+    display: block;
+  }
+  .admin-select, .admin-input {
+    width: 100%;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    padding: 10px 12px;
+    color: white;
+    font-size: 14px;
+    appearance: none;
+  }
+  .admin-select option { background: #3D2B1F; }
+  .admin-btn {
+    width: 100%;
+    background: var(--gold);
+    color: var(--stone);
+    border: none;
+    border-radius: 10px;
+    padding: 13px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 6px;
+  }
+  .admin-note {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    margin-top: 10px;
+    line-height: 1.5;
+  }
+
+  /* ── MISC ── */
+  .divider {
+    height: 1px;
+    background: var(--divider);
+    margin: 4px 0 0;
+  }
+  .footer {
+    text-align: center;
+    font-size: 11px;
+    color: #bbb;
+    padding: 24px 16px 12px;
+    line-height: 1.8;
+  }
+  .footer a { color: var(--saffron); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-label">அருள்மிகு • Coimbatore</div>
+  <div class="hero-tamil">அருள்மிகு சுப்பிரமணியசுவாமி திருக்கோயில்</div>
+  <div class="hero-english">Arulmigu Subramaniya Swami Temple · Marudhamalai</div>
+  <div class="hero-meta">
+    <div class="hero-pill"><span class="dot"></span> 12th Century Murugan Temple</div>
+    <div class="hero-pill"><span class="dot"></span> 600 ft · Western Ghats</div>
+  </div>
+</div>
+
+<!-- DARSHAN STATUS CARD -->
+<div class="status-card" id="statusCard">
+  <div class="status-header">
+    <span>Live Darshan Status</span>
+    <span class="status-badge badge-open" id="statusBadge">OPEN</span>
+  </div>
+  <div class="status-body">
+    <div class="status-row">
+      <div class="status-label">Current Status</div>
+      <div class="status-value" id="statusText">Darshan Open — Morning Session</div>
+    </div>
+    <div class="status-row">
+      <div class="status-label">Today's Session</div>
+      <div class="status-value">5:30 AM – 1:00 PM · 2:00 PM – 8:30 PM</div>
+    </div>
+    <div class="status-row">
+      <div class="status-label">Queue Wait</div>
+      <div class="status-value" id="waitText">~15 minutes</div>
+    </div>
+    <div class="status-row">
+      <div class="status-label">Crowd Level</div>
+      <div class="status-value" id="crowdText">Light — Good time to visit</div>
+    </div>
+    <div class="status-updated">
+      <svg width="10" height="10" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="6" cy="6" r="5.5" stroke="#999"/><path d="M6 3v3.5l2 1" stroke="#999" stroke-linecap="round"/></svg>
+      Updated <span id="lastUpdated">just now</span> · via temple WhatsApp
+    </div>
+  </div>
+</div>
+
+<!-- POOJA TIMINGS -->
+<div class="section">
+  <div class="section-title">Pooja Timings</div>
+  <div class="timing-card">
+    <div class="timing-row">
+      <div class="timing-left gold"></div>
+      <div class="timing-content">
+        <div>
+          <div class="timing-name">திருவனந்தல் — Thiruvanandal</div>
+          <div class="timing-sub">Opening Ritual · Abhishekam</div>
+        </div>
+        <div class="timing-time">5:30 AM</div>
+      </div>
+    </div>
+    <div class="timing-row">
+      <div class="timing-left"></div>
+      <div class="timing-content">
+        <div>
+          <div class="timing-name">காலை பூஜை — Morning Pooja</div>
+          <div class="timing-sub">Kalasandhi · Ucchi Kaalam</div>
+        </div>
+        <div class="timing-time">6:30 AM</div>
+      </div>
+    </div>
+    <div class="timing-row">
+      <div class="timing-left"></div>
+      <div class="timing-content">
+        <div>
+          <div class="timing-name">ஆர்த்தி — Aarti</div>
+          <div class="timing-sub">Mid-day offering</div>
+        </div>
+        <div class="timing-time">12:00 PM</div>
+      </div>
+    </div>
+    <div class="timing-row">
+      <div class="timing-left red"></div>
+      <div class="timing-content">
+        <div>
+          <div class="timing-name">மதிய இடைவேளை — Break</div>
+          <div class="timing-sub">Temple closed to public</div>
+        </div>
+        <div class="timing-time">1:00 – 2:00 PM</div>
+      </div>
+    </div>
+    <div class="timing-row">
+      <div class="timing-left"></div>
+      <div class="timing-content">
+        <div>
+          <div class="timing-name">மாலை பூஜை — Evening Pooja</div>
+          <div class="timing-sub">Sayarakshai</div>
+        </div>
+        <div class="timing-time">6:00 PM</div>
+      </div>
+    </div>
+    <div class="timing-row">
+      <div class="timing-left gold"></div>
+      <div class="timing-content">
+        <div>
+          <div class="timing-name">அர்த்தஜாம பூஜை — Night Aarti</div>
+          <div class="timing-sub">Closing ritual · Ekanta Seevai</div>
+        </div>
+        <div class="timing-time">8:00 PM</div>
+      </div>
+    </div>
+    <div class="timing-row">
+      <div class="timing-left red"></div>
+      <div class="timing-content">
+        <div>
+          <div class="timing-name">Temple Closes</div>
+          <div class="timing-sub">Steps close at 5:00 PM · Vehicles after 5 PM restricted</div>
+        </div>
+        <div class="timing-time">8:30 PM</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ANNADHANAM -->
+<div class="section">
+  <div class="section-title">Annadhanam</div>
+  <div class="anna-card">
+    <div class="anna-top">
+      <div class="anna-icon">🍛</div>
+      <div>
+        <div class="anna-title">அன்னதானம்</div>
+        <div class="anna-eng">Free Sacred Meal · All Devotees Welcome</div>
+      </div>
+    </div>
+    <div class="anna-times">
+      <div class="anna-slot">
+        <div class="anna-slot-label">Morning Meal</div>
+        <div class="anna-slot-time">11:00 AM</div>
+      </div>
+      <div class="anna-slot">
+        <div class="anna-slot-label">Evening Meal</div>
+        <div class="anna-slot-time">6:30 PM</div>
+      </div>
+    </div>
+    <div class="anna-note">
+      ☝️ Annadhanam is served at the foothills prasadam hall. On festival days (Thaipusam, Karthigai), additional sessions are arranged. No token required — offered freely to all.
+    </div>
+  </div>
+</div>
+
+<!-- DIRECTIONS & PARKING -->
+<div class="section">
+  <div class="section-title">Directions &amp; Parking</div>
+  <div class="info-grid">
+    <div class="info-tile">
+      <div class="icon">🚌</div>
+      <div class="label">By Bus</div>
+      <div class="detail">Routes 70, 70A from Gandhipuram Bus Stand. Drop at foothills.</div>
+      <a href="https://maps.app.goo.gl/ZtNnFzXFBx3kE5oq7" target="_blank">Navigate →</a>
+    </div>
+    <div class="info-tile">
+      <div class="icon">🚗</div>
+      <div class="label">By Car / Auto</div>
+      <div class="detail">15 km from Coimbatore city. Ghat road open till 5 PM for vehicles.</div>
+      <a href="https://maps.app.goo.gl/ZtNnFzXFBx3kE5oq7" target="_blank">Navigate →</a>
+    </div>
+    <div class="info-tile">
+      <div class="icon">🅿️</div>
+      <div class="label">Parking</div>
+      <div class="detail">New parking plaza at foothills. ₹30–50 for cars. Fill up by 9 AM on weekends.</div>
+    </div>
+    <div class="info-tile">
+      <div class="icon">🚶</div>
+      <div class="label">Temple Shuttle</div>
+      <div class="detail">Buses every 15 mins from foothills to top. Last bus 7:30 PM. ~₹15 fare.</div>
+    </div>
+  </div>
+
+  <!-- Steps warning -->
+  <div style="background:#FEF9EC;border:1px solid #F5D47A;border-radius:12px;padding:12px 14px;margin-top:10px;">
+    <div style="font-size:12px;font-weight:700;color:#B45309;margin-bottom:4px;">⛰️ Climbing the Steps</div>
+    <div style="font-size:12px;color:#78450D;line-height:1.6;">
+      ~837 steps from foothills. Best before 8 AM or after 4 PM. Steps close at 5 PM.
+      Carry water — it gets warm. Comfortable footwear strongly advised. Elderly visitors: take the shuttle bus.
+    </div>
+  </div>
+</div>
+
+<!-- NEARBY STAY -->
+<div class="section">
+  <div class="section-title">Nearby Stay</div>
+  <div class="hotel-list">
+    <div class="hotel-card">
+      <div class="hotel-icon">🏨</div>
+      <div>
+        <div class="hotel-name">Hotel Marutham</div>
+        <div class="hotel-detail">AC rooms · Budget · Foothills area</div>
+      </div>
+      <div class="hotel-dist">0.5 km</div>
+    </div>
+    <div class="hotel-card">
+      <div class="hotel-icon">🛕</div>
+      <div>
+        <div class="hotel-name">Temple Dharmashala</div>
+        <div class="hotel-detail">Pilgrim rest · Minimal amenities · Donation basis</div>
+      </div>
+      <div class="hotel-dist">On-site</div>
+    </div>
+    <div class="hotel-card">
+      <div class="hotel-icon">🏩</div>
+      <div>
+        <div class="hotel-name">Vadavalli Area Hotels</div>
+        <div class="hotel-detail">Multiple options · ₹800–2500/night · 3 km from temple</div>
+      </div>
+      <div class="hotel-dist">3 km</div>
+    </div>
+    <div class="hotel-card">
+      <div class="hotel-icon">🏙️</div>
+      <div>
+        <div class="hotel-name">Coimbatore City Hotels</div>
+        <div class="hotel-detail">Full options · 20 min drive · Best for families</div>
+      </div>
+      <div class="hotel-dist">15 km</div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:10px;">
+    <a href="https://wa.me/919629843122?text=I%20need%20accommodation%20near%20Marudhamalai%20temple%20on%20[date]%20for%20[guests]%20people"
+       style="font-size:12px;color:var(--saffron);font-weight:600;text-decoration:none;">
+      💬 Ask us for accommodation help →
+    </a>
+  </div>
+</div>
+
+<!-- POOJA BOOKING -->
+<div class="section">
+  <div class="section-title">Book a Pooja Seva</div>
+  <div class="booking-card">
+    <h3>பூஜை சேவை பதிவு</h3>
+    <p>Book Abhishekam, Archana, or special Sevas directly through WhatsApp. We coordinate with the temple office and confirm your slot.</p>
+    <div class="pooja-grid">
+      <div class="pooja-item">
+        <div class="pooja-item-name">அர்ச்சனை Archana</div>
+        <div class="pooja-item-price">₹50 – ₹200</div>
+      </div>
+      <div class="pooja-item">
+        <div class="pooja-item-name">அபிஷேகம் Abhishekam</div>
+        <div class="pooja-item-price">₹500 – ₹2,000</div>
+      </div>
+      <div class="pooja-item">
+        <div class="pooja-item-name">Special Darshan</div>
+        <div class="pooja-item-price">₹50 / person</div>
+      </div>
+      <div class="pooja-item">
+        <div class="pooja-item-name">Thirukalyanam</div>
+        <div class="pooja-item-price">₹2,000+</div>
+      </div>
+    </div>
+    <a class="btn-whatsapp"
+       href="https://wa.me/919629843122?text=🙏%20Vanakkam!%20I%20would%20like%20to%20book%20a%20Pooja%20Seva%20at%20Marudhamalai%20Temple.%0APooja%20type%3A%20%5Btype%5D%0ADate%20of%20visit%3A%20%5Bdate%5D%0AName%20for%20pooja%3A%20%5Bname%5D"
+       target="_blank">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Book via WhatsApp
+    </a>
+  </div>
+</div>
+
+<!-- ADMIN PANEL (accessed via #admin in URL) -->
+<div class="admin-panel" id="adminPanel">
+  <div class="admin-title">🔒 Temple Status Update</div>
+  <div class="admin-group">
+    <label class="admin-label">Darshan Status</label>
+    <select class="admin-select" id="adminStatus">
+      <option value="open">✅ Open — Darshan in progress</option>
+      <option value="busy">⚠️ Very Busy — Long queue today</option>
+      <option value="break">🕐 Break — Reopens at 2:00 PM</option>
+      <option value="closed">🔴 Closed for today</option>
+      <option value="festival">🎉 Festival Day — Special timings</option>
+    </select>
+  </div>
+  <div class="admin-group">
+    <label class="admin-label">Queue / Wait Time</label>
+    <select class="admin-select" id="adminQueue">
+      <option value="~15 minutes">~15 minutes (light)</option>
+      <option value="~30 minutes">~30 minutes (moderate)</option>
+      <option value="1–2 hours">1–2 hours (busy)</option>
+      <option value="2+ hours">2+ hours (very busy)</option>
+      <option value="No queue">No queue</option>
+    </select>
+  </div>
+  <div class="admin-group">
+    <label class="admin-label">Crowd Note (optional)</label>
+    <input class="admin-input" id="adminNote" type="text" placeholder="e.g. Festival crowds, rain, road closed..." />
+  </div>
+  <button class="admin-btn" onclick="applyStatus()">✅ Update Live Status</button>
+  <div class="admin-note">
+    Changes update immediately on this device. Share updated link with devotees via WhatsApp.<br>
+    For permanent updates, message <strong>hello@rojeru.in</strong>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  🙏 Information updated regularly via temple contacts<br>
+  A <a href="https://rojeru.in">RoJerU</a> pilot · <a href="#admin" onclick="toggleAdmin()">●</a><br>
+  Not an official temple website. For emergencies call temple office: <a href="tel:04222574812">0422-2574812</a>
+</div>
+
+<!-- STICKY BAR -->
+<div class="sticky-bar">
+  <a class="sticky-btn sticky-btn-secondary"
+     href="https://wa.me/919629843122?text=🙏%20I%20need%20help%20planning%20my%20Marudhamalai%20visit"
+     target="_blank">
+    💬 Ask Us
+  </a>
+  <a class="sticky-btn sticky-btn-primary"
+     href="https://wa.me/919629843122?text=🙏%20I%20want%20to%20book%20a%20Pooja%20Seva%20at%20Marudhamalai"
+     target="_blank">
+    🛕 Book Pooja
+  </a>
+</div>
+
+<script>
+// ── STATUS CONFIG ──
+const statusConfig = {
+  open:     { badge: 'badge-open',   label: 'OPEN',     text: 'Darshan Open — Morning Session' },
+  busy:     { badge: 'badge-busy',   label: 'BUSY',     text: 'Darshan Open — Very Busy Today' },
+  break:    { badge: 'badge-closed', label: 'BREAK',    text: 'Mid-day Break — Reopens 2:00 PM' },
+  closed:   { badge: 'badge-closed', label: 'CLOSED',   text: 'Temple Closed for Today' },
+  festival: { badge: 'badge-busy',   label: 'FESTIVAL', text: 'Festival Day — Special Timings Apply' }
+};
+
+// ── AUTO STATUS BY TIME ──
+function autoStatus() {
+  // Check if there's a saved override (admin set it)
+  const saved = sessionStorage.getItem('templeStatus');
+  if (saved) {
+    applyConfig(JSON.parse(saved));
+    return;
+  }
+  const now = new Date();
+  const h = now.getHours();
+  const m = now.getMinutes();
+  const t = h + m / 60;
+
+  let key = 'open', wait = '~15 minutes', crowd = 'Light — Good time to visit';
+
+  if      (t < 5.5)             { key = 'closed'; wait = '—'; crowd = 'Temple not yet open'; }
+  else if (t >= 5.5 && t < 9)  { key = 'open';   wait = '~10 minutes'; crowd = 'Light — Ideal morning visit'; }
+  else if (t >= 9 && t < 12)   { key = 'busy';   wait = '~45 minutes'; crowd = 'Moderate to busy — weekday peak'; }
+  else if (t >= 12 && t < 13)  { key = 'open';   wait = '~20 minutes'; crowd = 'Quieter — pre-break window'; }
+  else if (t >= 13 && t < 14)  { key = 'break';  wait = '—'; crowd = 'Reopens at 2:00 PM'; }
+  else if (t >= 14 && t < 17)  { key = 'open';   wait = '~20 minutes'; crowd = 'Good afternoon window'; }
+  else if (t >= 17 && t < 20)  { key = 'busy';   wait = '~30 minutes'; crowd = 'Evening rush — popular time'; }
+  else if (t >= 20 && t < 20.5){ key = 'open';   wait = '~10 minutes'; crowd = 'Closing soon — last darshan'; }
+  else                          { key = 'closed'; wait = '—'; crowd = 'Temple closed for the night'; }
+
+  updateUI(key, wait, crowd, 'auto-calculated');
+}
+
+function updateUI(key, wait, crowd, updatedBy) {
+  const cfg = statusConfig[key];
+  const badge = document.getElementById('statusBadge');
+  badge.className = 'status-badge ' + cfg.badge;
+  badge.textContent = cfg.label;
+  document.getElementById('statusText').textContent = cfg.text;
+  document.getElementById('waitText').textContent = wait;
+  document.getElementById('crowdText').textContent = crowd;
+  document.getElementById('lastUpdated').textContent = updatedBy === 'auto-calculated'
+    ? 'auto · ' + new Date().toLocaleTimeString('en-IN', {hour:'2-digit', minute:'2-digit'})
+    : 'just now · by temple contact';
+}
+
+function applyConfig(data) {
+  updateUI(data.key, data.wait, data.crowd, 'temple contact');
+}
+
+// ── ADMIN PANEL ──
+function toggleAdmin() {
+  const panel = document.getElementById('adminPanel');
+  panel.classList.toggle('active');
+}
+
+function applyStatus() {
+  const key   = document.getElementById('adminStatus').value;
+  const wait  = document.getElementById('adminQueue').value;
+  const note  = document.getElementById('adminNote').value;
+  const crowd = note || {
+    open: 'Darshan in progress',
+    busy: 'Very busy today — expect wait',
+    break: 'Reopens at 2:00 PM',
+    closed: 'Temple closed',
+    festival: 'Festival day — special timings'
+  }[key];
+
+  const data = { key, wait, crowd };
+  sessionStorage.setItem('templeStatus', JSON.stringify(data));
+  applyConfig(data);
+
+  // Close admin panel
+  document.getElementById('adminPanel').classList.remove('active');
+  alert('✅ Status updated! Share this page link with devotees.');
+}
+
+// ── HASH DETECTION ──
+if (window.location.hash === '#admin') {
+  document.getElementById('adminPanel').classList.add('active');
+}
+
+// ── INIT ──
+autoStatus();
+// Refresh auto-status every 5 minutes if no admin override
+setInterval(() => {
+  if (!sessionStorage.getItem('templeStatus')) autoStatus();
+}, 300000);
+</script>
+
+</body>
+</html>
